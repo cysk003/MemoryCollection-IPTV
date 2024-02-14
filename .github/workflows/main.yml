@@ -27,8 +27,6 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
       - name: Run script
         run: python ${{ github.workspace }}/IPTV.py
-      - name: 提交更改
-
 
       - name: 提交更改
         run: |
