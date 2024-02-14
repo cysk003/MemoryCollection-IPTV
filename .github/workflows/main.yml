@@ -1,27 +1,20 @@
-name: itvlist
-
+name: IPTV All
 on:
-  schedule:
-    - cron: '0 2,6,10,14,18,22 * * *'
   push:
-    branches:
+branches:
       - main
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-    
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
-
       - name: Install dependencies
-        run: pip install selenium requests futures eventlet
-
+        run: pip install selenium requests
       - name: Install Chrome WebDriver
         run: |
           LATEST_CHROMEDRIVER_VERSION=120.0.6099.109
@@ -32,8 +25,9 @@ jobs:
         run: |
           sudo ln -sf /usr/local/bin/chrome-headless-shell-linux64/chrome-headless-shell /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
-      - name: Run IPTV
+      - name: Run script
         run: python ${{ github.workspace }}/IPTV.py
+      - name: 提交更改
 
 
       - name: 提交更改
