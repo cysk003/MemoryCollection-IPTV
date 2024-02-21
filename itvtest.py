@@ -23,7 +23,7 @@ with open("itv.txt", 'r', encoding='utf-8') as file:
         line = line.strip()
         if line:
             channel_name, channel_url = line.split(',')
-            if '卫视' in channel_name or 'CCTV' in channel_name :
+            if '卫视' in channel_name or 'CCTV' in channel_name or '农民' in channel_name or '戏曲' in channel_name or '梨园' in channel_name:
                 channels.append((channel_name, channel_url))
 
 # 定义工作线程函数
@@ -156,7 +156,7 @@ with open("itvlist.txt", 'w', encoding='utf-8') as file:
                 file.write(f"{channel_name},{channel_url}\n")
                 channel_counters[channel_name] = 1
                 
-    file.write(f"{now_today}更新,#genre#\n{now_today}更新,http://39.134.24.161/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221225804/index.m3u8")
+    file.write(f"{now_today}更新,#genre#\n")
 
 
 with open("itvlist.m3u", 'w', encoding='utf-8') as file:
