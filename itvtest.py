@@ -158,6 +158,8 @@ with open("itvlist.txt", 'w', encoding='utf-8') as file:
                 
     file.write(f"{now_today}更新,#genre#\n\n CCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0
 ")
+   file.write(f"\n CCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0
+\n")
 
 
 with open("itvlist.m3u", 'w', encoding='utf-8') as file:
