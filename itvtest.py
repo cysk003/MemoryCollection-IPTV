@@ -17,7 +17,7 @@ results = []
 channels = []
 error_channels = []
 
-with open("tv/itv.txt", 'r', encoding='utf-8') as file:
+with open("itv.txt", 'r', encoding='utf-8') as file:
     lines = file.readlines()
     for line in lines:
         line = line.strip()
@@ -115,7 +115,7 @@ def write_channels(file, channel_type):
                 file.write(f"{channel_name},{channel_url}\n")
                 channel_counters[channel_name] = channel_counters.get(channel_name, 0) + 1
 
-with open("tv/itvlist.txt", 'w', encoding='utf-8') as file:
+with open("itvlist.txt", 'w', encoding='utf-8') as file:
     write_channels(file, 'CCTV')
     write_channels(file, '卫视')
     write_channels(file, '其他')

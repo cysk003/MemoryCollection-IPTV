@@ -17,7 +17,7 @@ results = []
 channels = []
 error_channels = []
 
-with open("tv/itv.txt", 'r', encoding='utf-8') as file:
+with open("itv.txt", 'r', encoding='utf-8') as file:
     lines = file.readlines()
     for line in lines:
         line = line.strip()
@@ -101,7 +101,7 @@ now_today = datetime.date.today()
 
 result_counter = 8  # 每个频道需要的个数
 
-with open("tv/cctv.txt", 'w', encoding='utf-8') as file:
+with open("cctv.txt", 'w', encoding='utf-8') as file:
     channel_counters = {}
     file.write('央视频道,#genre#\n')
     for result in results:
