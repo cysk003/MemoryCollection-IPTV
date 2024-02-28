@@ -1,0 +1,40 @@
+name: cess  # 工作流的名称
+
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 工作流运行的环境，这里设置为最新的 Ubuntu
+
+    steps:
+      - name: Checkout code  # 检出代码
+        uses: actions/checkout@v2
+    
+      - name: Set up Python  # 设置 Python 环境
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x  # 使用 3.x 版本的 Python
+
+      - name: Install dependencies  # 安装依赖
+        run: pip install selenium requests futures eventlet
+
+      - name: Run cctv  # 运行 cctv.py 脚本
+        run: python ${{ github.workspace }}/cctv.py
+        
+      - name: Run weishi  # 运行 weishi.py 脚本
+        run: python ${{ github.workspace }}/weishi.py
+        
+      - name: Run qita  # 运行 qita.py 脚本
+        run: python ${{ github.workspace }}/qita.py
+        
+      - name: 提交更改  # 提交更改到 Git
+        run: |
+          git config --local user.email "csszue@gmail.com"  # 设置 Git 用户邮箱
+          git config --local user.name "MemoryCollection"  # 设置 Git 用户名
+          git add .  # 添加所有更改到暂存区
+          git commit -m "Add generated file"  # 提交更改，这里应该移除 *.txt 和 *.m3u，因为 git commit 不接受文件名作为参数
+          #git pull --rebase  # 这行代码被注释掉了，如果你想在推送之前同步远程仓库的更改，你应该取消注释
+          git push -f  # 强制推送更改到远程仓库，注意这可能会覆盖远程仓库的更改
+
