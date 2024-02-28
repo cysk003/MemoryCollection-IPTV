@@ -20,14 +20,9 @@ jobs:
       - name: Install dependencies  # 安装依赖
         run: pip install selenium requests futures eventlet
 
-      - name: Run cctv  # 运行 cctv.py 脚本
-        run: python ${{ github.workspace }}/cctv.py
         
-      - name: Run weishi  # 运行 weishi.py 脚本
-        run: python ${{ github.workspace }}/weishi.py
-        
-      - name: Run qita  # 运行 qita.py 脚本
-        run: python ${{ github.workspace }}/qita.py
+      - name: Run itvtest  # 运行 qita.py 脚本
+        run: python ${{ github.workspace }}/itvtest.py
         
       - name: 提交更改  # 提交更改到 Git
         run: |
