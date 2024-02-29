@@ -1,4 +1,4 @@
-name: itvlist
+name: 定时更新
 
 on:
   schedule:
