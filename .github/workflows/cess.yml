@@ -32,15 +32,13 @@ jobs:
         
       # - name: Run qita
       #   run: python ${{ github.workspace }}/qita.py
-        
+     
       - name: 提交更改
         run: |
           git config --local user.email "csszue@gmail.com"  # 设置 Git 用户邮箱
           git config --local user.name "MemoryCollection"  # 设置 Git 用户名
-          git add .
-          
-          git commit tv/cctv.txt -m "Add generated file"
-          git commit *.txt -m "Add generated file"
-          git commit *.m3u -m "Add generated file"
+          git add tv/*  # 添加 tv/ 目录下的所有文件
+
+          git commit -m "Add generated files to TV directory"
           #git pull --rebase
           git push -f
