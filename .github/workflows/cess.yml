@@ -38,6 +38,8 @@ jobs:
           git config --local user.email "csszue@gmail.com"  # 设置 Git 用户邮箱
           git config --local user.name "MemoryCollection"  # 设置 Git 用户名
           git add .
+          
+          git commit tv/cctv.txt -m "Add generated file"
           git commit *.txt -m "Add generated file"
           git commit *.m3u -m "Add generated file"
           #git pull --rebase
