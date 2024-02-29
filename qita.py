@@ -17,7 +17,7 @@ results = []
 channels = []
 error_channels = []
 
-with open("itv.txt", 'r', encoding='utf-8') as file:
+with open("tv/itv.txt", 'r', encoding='utf-8') as file:
     lines = file.readlines()
     for line in lines:
         line = line.strip()
@@ -138,12 +138,12 @@ with open("qita.m3u", 'w', encoding='utf-8') as file:
                 file.write(f"{channel_url}\n")
                 channel_counters[channel_name] = 1
     
-    file.write(f"#EXTINF:-1 group-title=\"{now_today}更新\"\n")
+    file.write(f"#EXTINF:-1 group-title=\"{now_today}更新\"\n\n CCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
 
 # 合并文件内容
 file_contents = []
-file_paths = ["cctv.txt", "weishi.txt", "qita.txt"]  # 替换为实际的文件路径列表
+file_paths = ["tv/cctv.txt", "tv/weishi.txt", "tv/qita.txt"]  # 替换为实际的文件路径列表
 for file_path in file_paths:
     with open(file_path, 'r', encoding="utf-8") as file:
         content = file.read()
