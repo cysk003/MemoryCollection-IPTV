@@ -102,7 +102,7 @@ now_today = datetime.date.today()
 
 result_counter = 8  # 每个频道需要的个数
 
-with open("qita.txt", 'w', encoding='utf-8') as file:
+with open("tv/qita.txt", 'w', encoding='utf-8') as file:
     channel_counters = {}
     file.write('其他频道,#genre#\n')
     for result in results:
