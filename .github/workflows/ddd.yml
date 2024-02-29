@@ -1,17 +1,18 @@
-name: DDD
+name: Build and Push Docker Image
 
 on:
-    workflow_dispatch:
-  
+  push:
+    branches:
+      - main  # 触发构建的分支
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -21,42 +22,16 @@ jobs:
         run: |
           pip install selenium requests futures eventlet
 
-      - name: Run itv
-        run: python ${{ github.workspace }}/py/itv.py
-
-      - name: Run cctv
-        run: python ${{ github.workspace }}/py/cctv.py
-                
-      - name: Run weishi
-        run: python ${{ github.workspace }}/py/weishi.py
-                
-      - name: Run qita
-        run: python ${{ github.workspace }}/py/qita.py
-
-      - name: 提交更改
-        run: |
-          git config --local user.email "csszue@gmail.com"  # 设置 Git 用户邮箱
-          git config --local user.name "MemoryCollection"  # 设置 Git 用户名
-          cp tv/itvlist.txt ./  # 将 tv/itvlist.txt 文件复制到根目录
-          git add tv/*  # 添加 tv/ 目录下的所有文件
-          git add itvlist.txt  # 添加根目录下的 itvlist.txt 文件
-          git commit -m "Copy itvlist.txt to root directory and add generated files to TV directory"
-          #git pull --rebase
-          git push -f
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-            context: .
-            push: true
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/iptv
-            username: ${{ secrets.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-
-          
-          
-          
-          
-
-          
+        run: |
+          docker build -t memorycollection/my-python-app .
+          docker push memorycollection/my-python-app:latest
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
