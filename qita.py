@@ -118,27 +118,8 @@ with open("tv/qita.txt", 'w', encoding='utf-8') as file:
                 file.write(f"{channel_name},{channel_url}\n")
                 channel_counters[channel_name] = 1
                 
-    file.write(f"{now_today}更新,#genre#\n")
+    file.write(f"{now_today}更新,#genre#\n\n CCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
-with open("qita.m3u", 'w', encoding='utf-8') as file:
-    channel_counters = {}
-    #file.write('其他频道,#genre#\n')
-    for result in results:
-        channel_name, channel_url, speed = result
-        if 'CCTV' not in channel_name and '卫视' not in channel_name and '测试' not in channel_name:
-            if channel_name in channel_counters:
-                if channel_counters[channel_name] >= result_counter:
-                    continue
-                else:
-                    file.write(f"#EXTINF:-1 group-title=\"其他频道\",{channel_name}\n")
-                    file.write(f"{channel_url}\n")
-                    channel_counters[channel_name] += 1
-            else:
-                file.write(f"#EXTINF:-1 group-title=\"其他频道\",{channel_name}\n")
-                file.write(f"{channel_url}\n")
-                channel_counters[channel_name] = 1
-    
-    file.write(f"#EXTINF:-1 group-title=\"{now_today}更新\"\n\n CCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
 
 # 合并文件内容
@@ -150,6 +131,6 @@ for file_path in file_paths:
         file_contents.append(content)
 
 # 写入合并后的文件
-with open("itvlist.txt", "w", encoding="utf-8") as output:
+with open("tv/itvlist.txt", "w", encoding="utf-8") as output:
     output.write('\n'.join(file_contents))
     
