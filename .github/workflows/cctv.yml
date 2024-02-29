@@ -22,7 +22,7 @@ jobs:
         run: pip install selenium requests futures eventlet
 
       - name: Run cctv
-        run: python ${{ github.workspace }}/cctv.py
+        run: python ${{ github.workspace }}/py/cctv.py
         
      
       - name: 提交更改
