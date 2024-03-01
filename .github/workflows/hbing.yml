@@ -1,13 +1,12 @@
 name: 测速提交  # 工作流的名称
 
+
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["采集"]
-    types:
-      - completed
-    conclusion: 
-      - success
+  push:
+    paths:
+      - 'tv/itv.txt'
+
 
 jobs:
   build:
