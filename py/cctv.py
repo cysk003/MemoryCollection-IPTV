@@ -24,7 +24,8 @@ with open("tv/itv.txt", 'r', encoding='utf-8') as file:
         if line:
             channel_name, channel_url = line.split(',')
             excluded_channels = ['俄语', '教育', '英语', '西班牙', '阿拉伯语', '音乐', '风云']
-            if 'CCTV' in channel_name and not any(excluded in channel_name for excluded in excluded_channels):
+            import re
+            if 'CCTV' in channel_name and not re.search("[\u4e00-\u9fff]", channel_name):   # 判断是否包含中文
                 channels.append((channel_name, channel_url))
 
 # 定义工作线程函数
