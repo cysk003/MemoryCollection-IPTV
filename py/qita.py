@@ -102,22 +102,38 @@ now_today = datetime.date.today()
 
 result_counter = 8  # 每个频道需要的个数
 
+# 打开文件，准备写入
 with open("tv/qita.txt", 'w', encoding='utf-8') as file:
+    # 创建一个字典来存储每个频道的计数
     channel_counters = {}
+    # 写入文件的开头部分
     file.write('其他频道,#genre#\n')
+    # 遍历结果列表
     for result in results:
+        # 解包结果元组
         channel_name, channel_url, speed = result
-        if 'CCTV' not in channel_name and '卫视' not in channel_name and '测试' not in channel_name:
-            if channel_name in channel_counters:
-                if channel_counters[channel_name] >= result_counter:
-                    continue
-                else:
-                    file.write(f"{channel_name},{channel_url}\n")
-                    channel_counters[channel_name] += 1
-            else:
+        # 创建一个列表来存储要排除的频道名称
+        excluded_channels = ['CCTV', '卫视', '测试', 'CETV', '教育', '公共']
+
+        # 检查频道名称是否不包含要排除的频道名称
+        if not any(excluded in channel_name for excluded in excluded_channels):
+            # 获取频道的计数，如果频道不在字典中，就返回 0
+            count = channel_counters.get(channel_name, 0)
+            # 检查频道的计数是否小于结果计数器
+            if count < result_counter:
+                # 写入频道的名称和 URL
                 file.write(f"{channel_name},{channel_url}\n")
-                channel_counters[channel_name] = 1
-                
+                # 更新频道的计数
+                channel_counters[channel_name] = count + 1
+
+
+    from datetime import datetime, timedelta, timezone
+    # 创建一个时区对象表示北京时间
+    beijing_tz = timezone(timedelta(hours=8))
+    # 获取当前的北京时间
+    now = datetime.now(beijing_tz)
+    # 将时间格式化为 "月-日-时" 的格式
+    now_today = now.strftime("%m-%d-%H")            
     file.write(f"{now_today}更新,#genre#\n\nCCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
 
