@@ -24,15 +24,16 @@ jobs:
       - name: Run itv
         run: python ${{ github.workspace }}/py/itv.py
 
-      - name: Run cctv
-        run: python ${{ github.workspace }}/py/cctv.py
-        
-      - name: Run weishi
-        run: python ${{ github.workspace }}/py/weishi.py
-        
-      - name: Run qita
-        run: python ${{ github.workspace }}/py/qita.py
-
+      - name: Run scripts
+        run: |
+          nohup python ${{ github.workspace }}/py/cctv.py &
+          nohup python ${{ github.workspace }}/py/weishi.py &
+          nohup python ${{ github.workspace }}/py/qita.py &
+          wait
+      
+      - name: Run hebing
+        run: python ${{ github.workspace }}/py/hebing.py
+      
       - name: 提交更改
         run: |
           git config --local user.email "csszue@gmail.com"  # 设置 Git 用户邮箱
