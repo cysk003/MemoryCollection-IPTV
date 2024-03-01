@@ -134,15 +134,12 @@ for url in urls:
         for url in valid_urls:
             try:
                 # 发送GET请求获取JSON文件，设置超时时间为0.5秒
-                ip_start_index = url.find("//") + 2
-                ip_dot_start = url.find(".") + 1
-                ip_index_second = url.find("/", ip_dot_start)
-                base_url = url[:ip_start_index]  # http:// or https://
-                ip_address = url[ip_start_index:ip_index_second]
-                url_x = f"{base_url}{ip_address}"
-    
-                json_url = f"{url}"
-                response = requests.get(json_url, timeout=0.5)
+                from urllib.parse import urlparse
+
+                parsed_url = urlparse(url)
+                base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+
+                response = requests.get(url, timeout=0.5)
                 json_data = response.json()
     
                 try:
@@ -159,67 +156,51 @@ for url in urls:
                                 urld = f"{urlx}"
                             else:
                                 urld = f"{url_x}{urlx}"
-    
-                            if name and urld:
-                                # 删除特定文字
-                                name = name.replace("cctv", "CCTV")
-                                name = name.replace("中央", "CCTV")
-                                name = name.replace("央视", "CCTV")
-                                name = name.replace("高清", "")
-                                name = name.replace("超高", "")
-                                name = name.replace("HD", "")
-                                name = name.replace("标清", "")
-                                name = name.replace("频道", "")
-                                name = name.replace("纪录", "")
-                                name = name.replace("-", "")
-                                name = name.replace(" ", "")
-                                name = name.replace("PLUS", "+")
-                                name = name.replace("＋", "+")
-                                name = name.replace("(", "")
-                                name = name.replace(")", "")
-                                name = re.sub(r"CCTV(\d+)台", r"CCTV\1", name)
-                                name = name.replace("CCTV1综合", "CCTV1")
-                                name = name.replace("CCTV2财经", "CCTV2")
-                                name = name.replace("CCTV3综艺", "CCTV3")
-                                name = name.replace("CCTV4国际", "CCTV4")
-                                name = name.replace("CCTV4中文国际", "CCTV4")
-                                name = name.replace("CCTV4欧洲", "CCTV4")
-                                name = name.replace("CCTV5体育", "CCTV5")
-                                name = name.replace("CCTV6电影", "CCTV6")
-                                name = name.replace("CCTV7军事", "CCTV7")
-                                name = name.replace("CCTV7军农", "CCTV7")
-                                name = name.replace("CCTV7农业", "CCTV7")
-                                name = name.replace("CCTV7国防军事", "CCTV7")
-                                name = name.replace("CCTV8电视剧", "CCTV8")
-                                name = name.replace("CCTV9记录", "CCTV9")
-                                name = name.replace("CCTV9纪录", "CCTV9")
-                                name = name.replace("CCTV10科教", "CCTV10")
-                                name = name.replace("CCTV11戏曲", "CCTV11")
-                                name = name.replace("CCTV12社会与法", "CCTV12")
-                                name = name.replace("CCTV13新闻", "CCTV13")
-                                name = name.replace("CCTV新闻", "CCTV13")
-                                name = name.replace("CCTV14少儿", "CCTV14")
-                                name = name.replace("CCTV15音乐", "CCTV15")
-                                name = name.replace("CCTV16奥林匹克", "CCTV16")
-                                name = name.replace("CCTV17农业农村", "CCTV17")
-                                name = name.replace("CCTV17农业", "CCTV17")
-                                name = name.replace("CCTV5+体育赛视", "CCTV5+")
-                                name = name.replace("CCTV5+体育赛事", "CCTV5+")
-                                name = name.replace("CCTV5+体育", "CCTV5+")
-                                name = name.replace("上海卫视", "东方卫视")
-                                name = name.replace("内蒙古", "内蒙")
-                                name = name.replace("CMIPTV", "")
-                                name = name.replace("山东教育卫视", "山东教育")
-                                name = name.replace("吉林怀视", "吉林卫视")
-                                name = name.replace("CHC", "")
-                                if 'udp' not in urld or 'rtp' not in urld:
-                                    results.append(f"{name},{urld}")
+                                replacements = {
+                                    "cctv": "CCTV",
+                                    "中央": "CCTV",
+                                    "央视": "CCTV",
+                                    "高清": "",
+                                    "超高": "",
+                                    "HD": "",
+                                    "标清": "",
+                                    "频道": "",
+                                    "纪录": "",
+                                    "-": "",
+                                    " ": "",
+                                    "PLUS": "+",
+                                    "＋": "+",
+                                    "(": "",
+                                    ")": "",
+                                    "CCTV1综合": "CCTV1",
+                                    "CCTV2财经": "CCTV2",
+                                    # ...
+                                    "CCTV17农业": "CCTV17",
+                                    "CCTV5+体育赛视": "CCTV5+",
+                                    "CCTV5+体育赛事": "CCTV5+",
+                                    "CCTV5+体育": "CCTV5+",
+                                    "上海卫视": "东方卫视",
+                                    "内蒙古": "内蒙",
+                                    "CMIPTV": "",
+                                    "山东教育卫视": "山东教育",
+                                    "吉林怀视": "吉林卫视",
+                                    "CHC": ""
+                                }
+
+                                if name and urld:
+                                    for old, new in replacements.items():
+                                        name = name.replace(old, new)
+                                    name = re.sub(r"CCTV(\d+)台", r"CCTV\1", name)
+                                    if 'udp' not in urld or 'rtp' not in urld:
+                                        results.append(f"{name},{urld}")
                 except:
                     continue
             except:
                 continue
     except:
         continue
+
+
 
 results = set(results)   # 去重得到唯一的URL列表
 results = sorted(results)
