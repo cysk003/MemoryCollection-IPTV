@@ -6,6 +6,8 @@ on:
     workflows: ["采集"]
     types:
       - completed
+    conclusion: 
+      - success
 
 jobs:
   build:
