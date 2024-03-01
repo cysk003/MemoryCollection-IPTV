@@ -1,9 +1,11 @@
 name: 合并运营  # 工作流的名称
 
-
 on:
   workflow_dispatch:
-
+  workflow_run:
+    workflows: ["采集"]
+    types:
+      - completed
 
 jobs:
   build:
