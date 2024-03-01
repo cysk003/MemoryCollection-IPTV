@@ -1,4 +1,4 @@
-name: 合并运营  # 工作流的名称
+name: 测速提交  # 工作流的名称
 
 on:
   workflow_dispatch:
