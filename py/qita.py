@@ -136,7 +136,7 @@ with open("tv/qita.txt", 'w', encoding='utf-8') as file:
     # 获取当前的北京时间
     now = datetime.now(beijing_tz)
     # 将时间格式化为 "月-日-时" 的格式
-    now_today = now.strftime("%m-%d-%H")            
+    now_today = now.strftime("%m月%d日%H时")            
     file.write(f"{now_today}更新,#genre#\n\nCCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
 
