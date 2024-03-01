@@ -63,12 +63,12 @@ def worker():
                 result = channel_name, channel_url, f"{normalized_speed:.3f} MB/s"
                 results.append(result)
                 numberx = (len(results) + len(error_channels)) / len(channels) * 100
-                print(f"可用频道：{len(results)} 个 , 不可用频道：{len(error_channels)} 个 , 总频道：{len(channels)} 个 ,总进度：{numberx:.2f} %。")
+                print(f"其他  可用频道：{len(results)} 个 , 不可用频道：{len(error_channels)} 个 , 总频道：{len(channels)} 个 ,总进度：{numberx:.2f} %。")
         except:
             error_channel = channel_name, channel_url
             error_channels.append(error_channel)
             numberx = (len(results) + len(error_channels)) / len(channels) * 100
-            print(f"可用频道：{len(results)} 个 , 不可用频道：{len(error_channels)} 个 , 总频道：{len(channels)} 个 ,总进度：{numberx:.2f} %。")
+            print(f"其他  可用频道：{len(results)} 个 , 不可用频道：{len(error_channels)} 个 , 总频道：{len(channels)} 个 ,总进度：{numberx:.2f} %。")
 
         # 标记任务完成
         task_queue.task_done()
@@ -122,34 +122,15 @@ with open("tv/qita.txt", 'w', encoding='utf-8') as file:
         if not any(excluded in channel_name for excluded in excluded_channels):
             # 获取频道的计数，如果频道不在字典中，就返回 0
             count = channel_counters.get(channel_name, 0)
-            # 检查频道的计数是否小于结果计数器
             if count < result_counter:
-                # 写入频道的名称和 URL
                 file.write(f"{channel_name},{channel_url}\n")
-                # 更新频道的计数
                 channel_counters[channel_name] = count + 1
 
 
     from datetime import datetime, timedelta, timezone
     # 创建一个时区对象表示北京时间
     beijing_tz = timezone(timedelta(hours=8))
-    # 获取当前的北京时间
     now = datetime.now(beijing_tz)
-    # 将时间格式化为 "月-日-时" 的格式
     now_today = now.strftime("%m月%d日%H时")            
     file.write(f"{now_today}更新,#genre#\n\nCCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
-
-
-# # 合并文件内容
-# file_contents = []
-# file_paths = ["tv/cctv.txt", "tv/weishi.txt", "tv/qita.txt"]  # 替换为实际的文件路径列表
-# for file_path in file_paths:
-#     with open(file_path, 'r', encoding="utf-8") as file:
-#         content = file.read()
-#         file_contents.append(content)
-
-# # 写入合并后的文件
-# with open("tv/itvlist.txt", "w", encoding="utf-8") as output:
-#     output.write('\n'.join(file_contents))
-    

@@ -8,6 +8,7 @@ on:
       - 'tv/itv.txt'
 
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,6 +43,6 @@ jobs:
           git add tv/*  # 添加 tv/ 目录下的所有文件
           git add itvlist.txt  # 添加根目录下的 itvlist.txt 文件
 
-          git commit -m "$(date +'%Y-%m-%d %H:%M:%S') ：更新直播源"
+          git commit -m "$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S') ：更新直播源"
           #git pull --rebase
           git push -f

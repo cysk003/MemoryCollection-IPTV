@@ -134,12 +134,15 @@ for url in urls:
         for url in valid_urls:
             try:
                 # 发送GET请求获取JSON文件，设置超时时间为0.5秒
-                from urllib.parse import urlparse
-
-                parsed_url = urlparse(url)
-                base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
-
-                response = requests.get(url, timeout=0.5)
+                ip_start_index = url.find("//") + 2
+                ip_dot_start = url.find(".") + 1
+                ip_index_second = url.find("/", ip_dot_start)
+                base_url = url[:ip_start_index]  # http:// or https://
+                ip_address = url[ip_start_index:ip_index_second]
+                url_x = f"{base_url}{ip_address}"
+    
+                json_url = f"{url}"
+                response = requests.get(json_url, timeout=0.5)
                 json_data = response.json()
     
                 try:
