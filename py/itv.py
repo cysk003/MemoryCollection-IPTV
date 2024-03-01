@@ -52,6 +52,7 @@ def is_url_accessible(url):
 def process_url(url):
     """处理单个URL"""
     try:
+        print(f"Processing URL: {url}")
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
@@ -60,8 +61,8 @@ def process_url(url):
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
         time.sleep(10)
-        page_content = driver.page_source
-        driver.quit()
+        page_content = driver.page_source  # 修正此处
+        driver.quit()  # 记得关闭 WebDriver
         
         pattern = re.compile(r"http://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+")
         urls_all = pattern.findall(page_content)
