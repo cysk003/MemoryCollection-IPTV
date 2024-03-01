@@ -23,7 +23,10 @@ with open("tv/itv.txt", 'r', encoding='utf-8') as file:
         line = line.strip()
         if line:
             channel_name, channel_url = line.split(',')
-            if '卫视' not in channel_name and 'CCTV' not in channel_name and '测试' not in channel_name:
+                
+            renhe_channels = ['电影', '剧场', '电视剧', '相声小品', 'CHC']
+            # 检查频道名称是否不包含要排除的频道名称
+            if any(excluded in channel_name for excluded in renhe_channels):
                 channels.append((channel_name, channel_url))
 
 # 定义工作线程函数
