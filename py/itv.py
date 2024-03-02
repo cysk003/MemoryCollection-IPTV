@@ -8,7 +8,7 @@ import re
 
 # 将URL和文件名提取为变量，以便于管理和修改
 URLS_FILE = "py/urls.txt"
-RESULTS_FILE = "py/results.txt"
+RESULTS_FILE = "tv/itv.txt"
 
 def get_urls_from_file(file):
     with open(file, 'r') as f:
