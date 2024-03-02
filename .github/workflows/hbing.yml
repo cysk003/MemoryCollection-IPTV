@@ -30,18 +30,7 @@ jobs:
           wait
 
       - name: 合并文件
-        run: |
-          # 合并文件内容
-          file_contents = []
-          file_paths = glob.glob("tv/*.txt")  # 自动获取 tv/ 目录下的所有 .txt 文件
-          for file_path in file_paths:
-            with open(file_path, 'r', encoding="utf-8") as file:
-              content = file.read()
-              file_contents.append(content)
-
-          # 写入合并后的文件
-          with open("tv/itvlist.txt", "w", encoding="utf-8") as output:
-            output.write('\n'.join(file_contents))
+        run: python ${{ github.workspace }}/py/hebing.py
 
       - name: 提交更改
         run: |
