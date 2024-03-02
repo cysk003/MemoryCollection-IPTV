@@ -1,4 +1,4 @@
-name: 更新直播源
+name: 直播源
 
 on:
   workflow_dispatch:
