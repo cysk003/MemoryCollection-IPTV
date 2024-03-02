@@ -25,12 +25,13 @@ jobs:
         run: python ${{ github.workspace }}/py/cctv.py
         
      
+
       - name: 提交更改
         run: |
           git config --local user.email "csszue@gmail.com"  # 设置 Git 用户邮箱
           git config --local user.name "MemoryCollection"  # 设置 Git 用户名
           git add tv/*  # 添加 tv/ 目录下的所有文件
 
-          git commit -m "Add generated files to TV directory"
+          git commit -m "$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S') ：采集"
           #git pull --rebase
           git push -f
