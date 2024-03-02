@@ -69,6 +69,7 @@ def main():
             results.extend(valid_urls)
         except Exception as e:
             print(f"Error processing url {url}: {e}")
+    print(results)
     write_results_to_file(RESULTS_FILE, results)
 
 if __name__ == "__main__":
