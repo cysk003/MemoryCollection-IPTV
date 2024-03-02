@@ -30,6 +30,6 @@ jobs:
           git config --local user.name "MemoryCollection"  # 设置 Git 用户名
           git add tv/*  # 添加 tv/ 目录下的所有文件
 
-          git commit -m "$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S') ：采集"
-          #git pull --rebase
-          git push -f
+          git commit -m "Update files in TV directory at $(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')"
+          git pull --rebase
+          git push
