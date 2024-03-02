@@ -1,5 +1,4 @@
-name: 测速提交  # 工作流的名称
-
+name: 更新直播源
 
 on:
   workflow_dispatch:
@@ -7,50 +6,42 @@ on:
     paths:
       - 'tv/itv.txt'
 
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 检出代码
         uses: actions/checkout@v2
     
-      - name: Set up Python
+      - name: 设置 Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: pip install selenium requests futures eventlet
 
-      - name: Run scripts
+      - name: 运行直播源采集脚本
         run: |
           nohup python ${{ github.workspace }}/py/cctv.py &
           nohup python ${{ github.workspace }}/py/weishi.py &
           nohup python ${{ github.workspace }}/py/qita.py &
           wait
-      
-      # - name: Run hebing
-      #   run: python ${{ github.workspace }}/py/hebing.py
 
       - name: 合并文件
-          run: |
-              # 合并文件内容
-              file_contents = []
-              file_paths = ["tv/cctv.txt", "tv/weishi.txt", "tv/qita.txt"]  # 替换为实际的文件路径列表
-              for file_path in file_paths:
-                      with open(file_path, 'r', encoding="utf-8") as file:
-                              content = file.read()
-                              file_contents.append(content)
+        run: |
+          # 合并文件内容
+          file_contents = []
+          file_paths = glob.glob("tv/*.txt")  # 自动获取 tv/ 目录下的所有 .txt 文件
+          for file_path in file_paths:
+            with open(file_path, 'r', encoding="utf-8") as file:
+              content = file.read()
+              file_contents.append(content)
 
-              # 写入合并后的文件
-              with open("tv/itvlist.txt", "w", encoding="utf-8") as output:
-                      output.write('\n'.join(file_contents))
-
-
-
+          # 写入合并后的文件
+          with open("tv/itvlist.txt", "w", encoding="utf-8") as output:
+            output.write('\n'.join(file_contents))
 
       - name: 提交更改
         run: |
@@ -61,5 +52,5 @@ jobs:
           git add itvlist.txt  # 添加根目录下的 itvlist.txt 文件
 
           git commit -m "$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S') ：更新直播源"
-          #git pull --rebase
-          git push -f
+          git pull --rebase
+          git push
