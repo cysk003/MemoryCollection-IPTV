@@ -7,6 +7,10 @@ import requests
 import re
 from urllib.parse import urlparse, urlunparse
 from concurrent.futures import ThreadPoolExecutor
+import concurrent.futures
+
+# ...
+
 
 
 
@@ -85,8 +89,7 @@ name = ""
 valid_urls = []
 
 # ...
-
-with ThreadPoolExecutor(max_workers=100) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
     futures = [executor.submit(modify_and_check_urls, url) for url in urls]
     for future in concurrent.futures.as_completed(futures):
         valid_urls.extend(future.result())
