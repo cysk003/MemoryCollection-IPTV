@@ -132,5 +132,5 @@ with open("tv/qita.txt", 'w', encoding='utf-8') as file:
     beijing_tz = timezone(timedelta(hours=8))
     now = datetime.now(beijing_tz)
     now_today = now.strftime("%m月%d日%H时")            
-    file.write(f"{now_today}更新,#genre#\n\nCCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
+    file.write(f"\n{now_today},#genre#\n\nCCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0\n")
 
