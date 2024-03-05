@@ -68,6 +68,8 @@ def is_url_accessible(url):
 
 results = []
 
+
+
 for url in urls:
     try:
         # 创建一个Chrome WebDriver实例
