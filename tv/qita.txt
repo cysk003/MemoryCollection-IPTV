@@ -1,15 +1,17 @@
 其他频道,#genre#
+CHC动作电影,http://183.94.212.30:9901/tsfile/live/1019_1.m3u8?key=txiptv&playlive=1&authid=0
+CHC家庭影院,http://112.235.200.18:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0
+CHC家庭影院,http://112.235.200.183:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0
+CHC电影,http://112.235.200.218:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0
+CHC电影,http://112.235.202.123:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0
+CHC电影,http://112.235.202.92:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0
 IPTV古装剧场,http://118.253.0.237:2023/tsfile/live/1085_1.m3u8?key=txiptv&playlive=1&authid=0
 IPTV经典剧场,http://118.253.0.237:2023/tsfile/live/1086_1.m3u8?key=txiptv&playlive=1&authid=0
-淘电影,http://115.171.86.183:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0
+深圳电视剧,http://61.141.202.118:9901/tsfile/live/0126_3.m3u8?key=txiptv&playlive=1&authid=0
 湖南电影,http://118.253.0.237:2023/tsfile/live/1031_1.m3u8?key=txiptv&playlive=1&authid=0
-湖南电影,http://42.49.189.17:9008/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0
 湖南电视剧,http://118.253.0.237:2023/tsfile/live/1032_1.m3u8?key=txiptv&playlive=1&authid=0
 湖南电视剧,http://42.49.189.17:9008/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0
-电视剧,http://180.167.104.105:9901/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid=0
-福建电视剧,http://117.27.190.42:9901/tsfile/live/23287_1.m3u8?key=txiptv&playlive=1&authid=0
-第一剧场,http://123.182.208.248:8088/tsfile/live/1011_1.m3u8?key=txiptv&playlive=1&authid=0
 
-03月09日17时,#genre#
+03月09日20时,#genre#
 
 CCTV1,http://58.210.60.226:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0
